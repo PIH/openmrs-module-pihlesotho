@@ -53,7 +53,7 @@ public class ProviderRoleBundle extends AbstractMetadataBundle {
 		
 		Set<ProviderAttributeType> providerAttributes = new HashSet<ProviderAttributeType>();
 		ProviderAttributeType providerAttributeType = providerService
-		        .getProviderAttributeTypeByUuid(ProviderAttributeTypeBundle.ProviderAttributeTypes.DATE_HIRED);
+		        .getProviderAttributeTypeByUuid(ProviderAttributeTypeBundle.ProviderAttributeTypes.DATE_OF_TRAINING);
 		if (providerAttributeType != null) {
 			providerAttributes.add(providerAttributeType);
 		}
