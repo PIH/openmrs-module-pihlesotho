@@ -72,6 +72,11 @@ public class ProviderRoleBundle extends AbstractMetadataBundle {
 		if (providerAttributeType != null) {
 			providerAttributes.add(providerAttributeType);
 		}
+		providerAttributeType = providerService
+		        .getProviderAttributeTypeByUuid(ProviderAttributeTypeBundle.ProviderAttributeTypes.OWNERSHIP);
+		if (providerAttributeType != null) {
+			providerAttributes.add(providerAttributeType);
+		}
 		
 		ProviderRole vhwSupervisee = install(providerRole("CHW", null, relationshipTypes, providerAttributes,
 		    ProviderRoles.CHW));

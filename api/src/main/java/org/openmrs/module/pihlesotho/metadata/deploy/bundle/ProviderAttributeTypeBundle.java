@@ -37,6 +37,8 @@ public class ProviderAttributeTypeBundle extends AbstractMetadataBundle {
 		public static final String DATE_OF_TRAINING = "c8ef8a16-a8cd-4748-b0ea-e8a1ec503fbb";
 		
 		public static final String CADRE = "70D039A3-DA50-43EA-8FC0-D250102A4793";
+		
+		public static final String OWNERSHIP = "3171BEF5-7BB2-41A7-A99A-84A99D47B620";
 	}
 	
 	/**
@@ -65,6 +67,12 @@ public class ProviderAttributeTypeBundle extends AbstractMetadataBundle {
 		if (cadreConcept != null) {
 			install(providerAttributeType("Cadre", "Cadre", CodedConceptDatatype.class, cadreConcept.getConceptId()
 			        .toString(), 0, 1, ProviderAttributeTypes.CADRE));
+		}
+		
+		Concept ownershipConcept = conceptService.getConceptByUuid(ChwConcepts.Concepts.OWNERSHIP);
+		if (ownershipConcept != null) {
+			install(providerAttributeType("Ownership", "Ownership", CodedConceptDatatype.class, ownershipConcept
+			        .getConceptId().toString(), 0, 1, ProviderAttributeTypes.OWNERSHIP));
 		}
 		
 	}
