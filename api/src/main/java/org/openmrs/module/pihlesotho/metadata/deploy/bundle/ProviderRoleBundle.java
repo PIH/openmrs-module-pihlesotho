@@ -33,6 +33,8 @@ public class ProviderRoleBundle extends AbstractMetadataBundle {
 		public static final String CHW = "68624C4C-9E10-473B-A849-204820D16C45";
 		
 		public static final String CHW_SUPERVISOR = "11C1A56D-82F7-4269-95E8-2B67B9A3D837";
+		
+		public static final String CHW_COORDINATOR = "E050AA6E-AFFB-4D31-B00F-CE118ECDEF18";
 	}
 	
 	/**
@@ -87,8 +89,16 @@ public class ProviderRoleBundle extends AbstractMetadataBundle {
 			superviseeRoles.add(vhwSupervisee);
 		}
 		
-		install(providerRole("CHW Supervisor", superviseeRoles, relationshipTypes, providerAttributes,
-		    ProviderRoles.CHW_SUPERVISOR));
+		ProviderRole vhwSupervisor = install(providerRole("CHW Supervisor", superviseeRoles, relationshipTypes,
+		    providerAttributes, ProviderRoles.CHW_SUPERVISOR));
+		Set<ProviderRole> chwSupervisorRoles = null;
+		if (vhwSupervisor != null) {
+			chwSupervisorRoles = new HashSet<ProviderRole>();
+			chwSupervisorRoles.add(vhwSupervisor);
+		}
+		
+		install(providerRole("CHW Coordinator", chwSupervisorRoles, relationshipTypes, providerAttributes,
+		    ProviderRoles.CHW_COORDINATOR));
 		
 	}
 }
