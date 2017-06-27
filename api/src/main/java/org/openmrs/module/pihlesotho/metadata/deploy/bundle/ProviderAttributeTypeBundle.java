@@ -39,6 +39,8 @@ public class ProviderAttributeTypeBundle extends AbstractMetadataBundle {
 		public static final String CADRE = "70D039A3-DA50-43EA-8FC0-D250102A4793";
 		
 		public static final String OWNERSHIP = "3171BEF5-7BB2-41A7-A99A-84A99D47B620";
+		
+		public static final String FACILITY = "BCB608BF-2EAF-4634-B639-C40A01F13315";
 	}
 	
 	/**
@@ -61,6 +63,12 @@ public class ProviderAttributeTypeBundle extends AbstractMetadataBundle {
 		if (dateHired != null) {
 			dateHired.setPreferredHandlerClassname("org.openmrs.web.attribute.handler.DateFieldGenDatatypeHandler");
 			providerService.saveProviderAttributeType(dateHired);
+		}
+		
+		Concept facilityConcept = conceptService.getConceptByUuid(ChwConcepts.Concepts.FACILITY);
+		if (facilityConcept != null) {
+			install(providerAttributeType("Facility", "Facility", CodedConceptDatatype.class, facilityConcept.getConceptId()
+			        .toString(), 0, 1, ProviderAttributeTypes.FACILITY));
 		}
 		
 		Concept cadreConcept = conceptService.getConceptByUuid(ChwConcepts.Concepts.CADRE);

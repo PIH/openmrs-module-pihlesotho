@@ -16,7 +16,7 @@ public class ChwConcepts extends VersionedPihConceptBundle {
 	
 	@Override
 	public int getVersion() {
-		return 2;
+		return 3;
 	}
 	
 	public static final class Concepts {
@@ -36,6 +36,23 @@ public class ChwConcepts extends VersionedPihConceptBundle {
 		public static final String PIH = "F9C619F3-AFF9-4ED3-A267-F566C438CF1C";
 		
 		public static final String OWNERSHIP = "6748DA89-3A50-4E19-AB22-54E62C9BAB8E";
+		
+		public static final String FACILITY = "F5DABCB3-291C-41E8-A9A8-75A4593871E6";
+		
+		public static final String BOBETE = "F0873869-74C9-403B-952A-DC198AE592E0";
+		
+		public static final String LEBAKENG = "17893089-66E6-43B7-94FB-08490148FA49";
+		
+		public static final String MANAMANENG = "9E13A632-963B-4B75-A034-97842F16F180";
+		
+		public static final String METHALENENG = "8DD3FDED-79CE-486C-B355-9527F09EAF97";
+		
+		public static final String NOHANA = "F5DABCB3-291C-41E8-A9A8-75A4593871E6";
+		
+		public static final String NKAU = "0ACA6763-1ACB-4ED3-B1A5-61338E0BC2E4";
+		
+		public static final String TLHANYAKU = "866C7576-1189-4D2E-8737-10411DD53C1A";
+		
 	}
 	
 	@Override
@@ -111,5 +128,80 @@ public class ChwConcepts extends VersionedPihConceptBundle {
 		        .mapping(
 		            new ConceptMapBuilder("55DD201F-4707-4BB1-83DE-55A885B51CD0").type(sameAs).ensureTerm(pih, "Ownership")
 		                    .build()).answers(govOfLesotho, globalFund, pihPayment).build());
+		
+		Concept bobete = install(new ConceptBuilder(Concepts.BOBETE)
+		        .datatype(notApplicable)
+		        .conceptClass(misc)
+		        .name("4E56ECD6-DCFE-4AE2-A9CA-BDB4783BDBEA", "Bobete", Locale.ENGLISH, ConceptNameType.FULLY_SPECIFIED)
+		        // locale-preferred
+		        .description("F1EBA988-4D0D-47AA-98BD-61B6E40CB0AD", "Bobete facility location", Locale.ENGLISH)
+		        .mapping(
+		            new ConceptMapBuilder("8CCE16FD-7C48-493F-A520-976DC0F947B3").type(sameAs).ensureTerm(pih, "Bobete")
+		                    .build()).build());
+		Concept lebakeng = install(new ConceptBuilder(Concepts.LEBAKENG)
+		        .datatype(notApplicable)
+		        .conceptClass(misc)
+		        .name("F4ACD186-5C8E-4A98-8348-2B5C231365D3", "Lebakeng", Locale.ENGLISH, ConceptNameType.FULLY_SPECIFIED)
+		        // locale-preferred
+		        .description("5ABA6019-32C1-4248-83DE-1A2B34C9214D", "Lebakeng facility location", Locale.ENGLISH)
+		        .mapping(
+		            new ConceptMapBuilder("718A755C-6DEC-42EE-9FDC-D58099AF9964").type(sameAs).ensureTerm(pih, "Lebakeng")
+		                    .build()).build());
+		Concept manamaneng = install(new ConceptBuilder(Concepts.MANAMANENG)
+		        .datatype(notApplicable)
+		        .conceptClass(misc)
+		        .name("2F0EED8D-1A80-4E65-9F19-7389E9F08729", "Manamaneng", Locale.ENGLISH, ConceptNameType.FULLY_SPECIFIED)
+		        // locale-preferred
+		        .description("24E759BF-163A-4D8E-8490-6048848F52C9", "Manamaneng facility location", Locale.ENGLISH)
+		        .mapping(
+		            new ConceptMapBuilder("ECBE0BFA-44DF-4007-B9C6-5150A65D0D00").type(sameAs).ensureTerm(pih, "Manamaneng")
+		                    .build()).build());
+		
+		Concept methaleneng = install(new ConceptBuilder(Concepts.METHALENENG)
+		        .datatype(notApplicable)
+		        .conceptClass(misc)
+		        .name("E32B8D79-4667-4443-AE83-ECF3E1005736", "Methaleneng", Locale.ENGLISH, ConceptNameType.FULLY_SPECIFIED)
+		        // locale-preferred
+		        .description("CC6F9AF2-74CC-4537-B907-8D644B35337F", "Methaleneng facility location", Locale.ENGLISH)
+		        .mapping(
+		            new ConceptMapBuilder("72045A9C-F329-40D7-A105-8F46A334AC44").type(sameAs)
+		                    .ensureTerm(pih, "Methaleneng").build()).build());
+		Concept nohana = install(new ConceptBuilder(Concepts.NOHANA)
+		        .datatype(notApplicable)
+		        .conceptClass(misc)
+		        .name("96B8DCD0-15BD-4CB5-80E3-78959F2E2594", "Nohana", Locale.ENGLISH, ConceptNameType.FULLY_SPECIFIED)
+		        // locale-preferred
+		        .description("0C7E96C2-22B4-4AF5-BB07-116DE41C9076", "Nohana facility location", Locale.ENGLISH)
+		        .mapping(
+		            new ConceptMapBuilder("1040010E-9A51-40CE-930D-A34914A4ABCE").type(sameAs).ensureTerm(pih, "Nohana")
+		                    .build()).build());
+		Concept nkau = install(new ConceptBuilder(Concepts.NKAU)
+		        .datatype(notApplicable)
+		        .conceptClass(misc)
+		        .name("6994BF57-9299-4A75-9C85-C13BCB317A6D", "Nkau", Locale.ENGLISH, ConceptNameType.FULLY_SPECIFIED)
+		        // locale-preferred
+		        .description("7D36869E-51CB-4D8F-852C-1A5B0C105C15", "Nkau facility location", Locale.ENGLISH)
+		        .mapping(
+		            new ConceptMapBuilder("4A30FEFF-B9E1-4FB7-9221-FC59215CA54B").type(sameAs).ensureTerm(pih, "Nkau")
+		                    .build()).build());
+		Concept tlhanyaku = install(new ConceptBuilder(Concepts.TLHANYAKU)
+		        .datatype(notApplicable)
+		        .conceptClass(misc)
+		        .name("A0CD5D2C-0DEE-43E6-8FFF-E6EDC34911FF", "Tlhanyaku", Locale.ENGLISH, ConceptNameType.FULLY_SPECIFIED)
+		        // locale-preferred
+		        .description("3EFAB5A4-2278-4F66-BC98-88AEB74B7A59", "Tlhanyaku facility location", Locale.ENGLISH)
+		        .mapping(
+		            new ConceptMapBuilder("46A40B90-F8CE-4E9E-B2FE-2C15A0954A58").type(sameAs).ensureTerm(pih, "Tlhanyaku")
+		                    .build()).build());
+		
+		Concept facility = install(new ConceptBuilder(Concepts.FACILITY)
+		        .datatype(coded)
+		        .conceptClass(question)
+		        .name("479EF452-B2AC-43D5-92A0-7D00A8412504", "Facility", Locale.ENGLISH, ConceptNameType.FULLY_SPECIFIED)
+		        // locale-preferred
+		        .description("EE349AAB-561F-4386-8620-7E05C9A73EF1", "Facility location", Locale.ENGLISH)
+		        .mapping(
+		            new ConceptMapBuilder("798F427D-0A78-4A8B-815A-52D1A5E743A7").type(sameAs).ensureTerm(pih, "Facility")
+		                    .build()).answers(bobete, lebakeng, manamaneng, methaleneng, nohana, nkau, tlhanyaku).build());
 	}
 }
