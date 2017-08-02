@@ -32,7 +32,7 @@ public class AdminListExtensionTest {
 		Map<String, String> links = ext.getLinks();
 		
 		assertThat(links, is(notNullValue()));
-		assertThat(links.size(), is(not(0)));
+		assertThat(links.size(), is(0));
 	}
 	
 	/**
