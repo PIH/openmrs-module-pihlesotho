@@ -46,7 +46,7 @@ public class AdminList extends AdministrationSectionExt {
 		
 		if (ModuleFactory.isModuleStarted("coreapps")) {
 			map.put("/coreapps/providermanagement/providerList.page", "List CHW");
-			map.put("/coreapps/providermanagement/editProvider.page", "Create CHW");
+			map.put("/coreapps/providermanagement/findPatient.page", "Create CHW");
 		}
 		
 		return map;
