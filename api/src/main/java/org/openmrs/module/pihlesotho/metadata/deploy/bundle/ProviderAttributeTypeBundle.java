@@ -57,7 +57,7 @@ public class ProviderAttributeTypeBundle extends AbstractMetadataBundle {
 		install(providerAttributeType("Households", "Number of households monitored by a VHW", FreeTextDatatype.class, null,
 		    0, 1, ProviderAttributeTypes.NUMBER_OF_HOUSEHOLDS));
 		
-		ProviderAttributeType dateHired = install(providerAttributeType("Date of Training",
+		ProviderAttributeType dateHired = install(providerAttributeType("Recruitment Training Date",
 		    "The date the provider was provided training.", DateDatatype.class, null, 0, 1,
 		    ProviderAttributeTypes.DATE_OF_TRAINING));
 		if (dateHired != null) {
