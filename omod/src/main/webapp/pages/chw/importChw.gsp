@@ -61,6 +61,8 @@
                 <td>{{ chw.lastName }} </td>
                 <td>{{ chw.healthCenter }} </td>
                 <td>{{ chw.role }} </td>
+                <td ng-if="chw.phoneNumber">{{ chw.phoneNumber }} </td>
+                <td ng-if="chw.cadre">{{ chw.cadre }} </td>
                 <td ng-if="chw.gender">{{ chw.gender }} </td>
                 <td ng-if="chw.age">{{ chw.age }} </td>
                 <td ng-if="chw.district">{{ chw.district }} </td>

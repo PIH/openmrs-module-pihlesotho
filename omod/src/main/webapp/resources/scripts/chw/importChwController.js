@@ -18,10 +18,11 @@ angular.module('importChwApp', ['ngDialog'])
                 PROVIDER_ROLES: {
                     CHW_PROVIDER_ROLE: "68624C4C-9E10-473B-A849-204820D16C45",
                     CHW_SENIOR_PROVIDER_ROLE: "11C1A56D-82F7-4269-95E8-2B67B9A3D837",
-                    CHW_SITE_SUPERVISOR_PROVIDER_ROLE: "30A32CFA-E88F-4405-AC89-E3FA68BC30F0"
+                    CHW_SITE_SUPERVISOR_PROVIDER_ROLE: "E050AA6E-AFFB-4D31-B00F-CE118ECDEF18"
                 },
                 PROVIDER_ATTRIBUTES: {
-                    HEALTH_FACILITY: "94047146-7918-4927-9401-F4284A10C7FD"
+                    HEALTH_FACILITY: "BCB608BF-2EAF-4634-B639-C40A01F13315",
+                    PHONE_NUMBER: "30375A78-FA92-4C5C-A2FD-7E8339EC69CF"
                 }
             };
 
@@ -33,20 +34,7 @@ angular.module('importChwApp', ['ngDialog'])
             ]);
 
             var locationsMap = new Map([
-                ["Neno District Hospital", {code: "NNO", uuid: "0d414ce2-5ab4-11e0-870c-9f6107fee88e"}],
-                ["Chifunga", { code: "CFGA", uuid: "0d4166a0-5ab4-11e0-870c-9f6107fee88e" }],
-                ["Dambe" , { code: "DAM", uuid: "976dcd06-c40e-4e2e-a0de-35a54c7a52ef" } ],
-                ["Lisungwi" , { code: "LSI", uuid: "0d416376-5ab4-11e0-870c-9f6107fee88e" }],
-                ["Luwani" , { code: "LWAN", uuid: "0d416506-5ab4-11e0-870c-9f6107fee88e" }],
-                ["Nsambe" , { code: "NSM", uuid: "0d416830-5ab4-11e0-870c-9f6107fee88e" }],
-                ["Ligowe" , { code: "LGWE", uuid: "0d417e38-5ab4-11e0-870c-9f6107fee88e" }],
-                ["Matandani" , { code: "MTDN", uuid: "0d415200-5ab4-11e0-870c-9f6107fee88e" }],
-                ["Magaleta" , { code: "MGT", uuid: "0d414eae-5ab4-11e0-870c-9f6107fee88e" }],
-                ["Neno Parish" , { code: "NOP", uuid: "ca86238f-eab4-4c55-b244-2a8c82e86ecd" }],
-                ["Matope" , { code: "MTE", uuid: "0d416b3c-5ab4-11e0-870c-9f6107fee88e" }],
-                ["Zalewa" , { code: "ZLA", uuid: "0d417fd2-5ab4-11e0-870c-9f6107fee88e" }],
-                ["Nkula" , { code: "NKA", uuid: "0d4169b6-5ab4-11e0-870c-9f6107fee88e" }],
-                ["Midzemba" , { code: "MIHC", uuid: "0d4182e8-5ab4-11e0-870c-9f6107fee88e" }]
+                ["BOBETE" , { code: "BOBET", uuid: "62094c52-1b76-102d-b823-000c29891b1e" }]
             ]);
 
             this.CONSTANTS = CONSTANTS;
@@ -80,20 +68,26 @@ angular.module('importChwApp', ['ngDialog'])
                     sourceUuid: sourceUuid
                 };
 
-                return $http.post(CONSTANTS.URLS.IDENTIFIER_SOURCE, generateIdentifiers).then(function(resp) {
-                    if (resp.status == 201) {
-                        // identifier generated
-                        if (resp.data && resp.data.identifiers && resp.data.identifiers.length > 0) {
-                            // one identifier has been generated
-                            return locationsMap.get(chw.healthCenter).code + " " + resp.data.identifiers[0];
+                if (chw.identifier != null ) {
+                    return new Promise(function (resolve, reject) {
+                        resolve(chw.identifier);
+                    });
+                } else {
+                    return $http.post(CONSTANTS.URLS.IDENTIFIER_SOURCE, generateIdentifiers).then(function (resp) {
+                        if (resp.status == 201) {
+                            // identifier generated
+                            if (resp.data && resp.data.identifiers && resp.data.identifiers.length > 0) {
+                                // one identifier has been generated
+                                return locationsMap.get(chw.healthCenter).code + " " + resp.data.identifiers[0];
+                            }
+                            return null;
+                        } else {
+                            return null;
                         }
-                        return null;
-                    } else {
-                        return null;
-                    }
-                }, function (error) {
-                    console.log("failed to generate identifier: " + JSON.stringify(error, undefined, 4));
-                });
+                    }, function (error) {
+                        console.log("failed to generate identifier: " + JSON.stringify(error, undefined, 4));
+                    });
+                }
 
             };
 
@@ -131,6 +125,29 @@ angular.module('importChwApp', ['ngDialog'])
                         }, function (error) {
                             console.log("failed to create provider attribute: "
                                 + chw.healthCenter + JSON.stringify(error, undefined, 4));
+                        });
+                    }
+                }
+            }
+
+            this.addPhoneNumber = function (chw) {
+                if (chw.phoneNumber) {
+                    if (chw.phoneNumber) {
+                        var attribute = {
+                            attributeType: CONSTANTS.PROVIDER_ATTRIBUTES.PHONE_NUMBER,
+                            value: chw.phoneNumber
+                        };
+                        var url = CONSTANTS.URLS.PROVIDER + "/" + chw.uuid + "/attribute";
+                        return $http.post(url, attribute).then(function(resp) {
+                            if (resp.status == 201) {
+                                // provider attribute has been created
+                                return resp.data;
+                            } else {
+                                return null;
+                            }
+                        }, function (error) {
+                            console.log("failed to create provider attribute: "
+                                + chw.phoneNumber + JSON.stringify(error, undefined, 4));
                         });
                     }
                 }
@@ -309,6 +326,7 @@ angular.module('importChwApp', ['ngDialog'])
                                 if(personId) {
                                     chw.personId = personId.personId;
                                 }
+
                                 ImportChwService.getIdentifierSource().then( function (identifierSource) {
                                     if (identifierSource){
                                         ImportChwService.getNextIdentifier(chw, identifierSource).then( function (identifier) {
@@ -319,8 +337,15 @@ angular.module('importChwApp', ['ngDialog'])
                                                     if (respProvider && respProvider.success === "true") {
                                                         console.log("newProvider has been created = " + respProvider);
                                                         chw.identifier = respProvider.identifier;
+                                                        chw.uuid = respProvider.uuid;
                                                         ImportChwService.addHealthFacility(respProvider, chw).then(function (providerHC) {
-                                                            deferred.resolve(newProvider);
+                                                            console.log("Health Facility has been added to the provider");
+                                                            ImportChwService.addPhoneNumber(chw).then(function (providerPhone){
+                                                                deferred.resolve(newProvider);
+                                                            }, function (errorPhone) {
+                                                                console.log("failed to add Phone Number attribute to provider" + JSON.stringify(errorPhone, undefined, 4));
+                                                                deferred.reject(errorPhone);
+                                                            });
                                                         }, function(errorHC) {
                                                             console.log("failed to add Health Facility attribute to provider" + JSON.stringify(errorHC, undefined, 4));
                                                             deferred.reject(errorHC);
@@ -414,7 +439,7 @@ angular.module('importChwApp', ['ngDialog'])
                 }
                 for (i = 0; i < $scope.pendingImportChws.length; i++) {
                     var chwValues = $scope.pendingImportChws[i];
-                    if (chwValues.length ==  6) {
+                    if (chwValues.length >  7) {
                         var chwObj = {};
                         chwObj.id = chwValues[0];
                         chwObj.identifier = chwValues[1];
@@ -422,6 +447,8 @@ angular.module('importChwApp', ['ngDialog'])
                         chwObj.lastName = chwValues[3];
                         chwObj.healthCenter = chwValues[4];
                         chwObj.role = chwValues[5];
+                        chwObj.phoneNumber = chwValues[6];
+                        chwObj.cadre = chwValues[7];
                         chwObj.personId = 0;
                         $scope.chwList.push(chwObj);
                     }
