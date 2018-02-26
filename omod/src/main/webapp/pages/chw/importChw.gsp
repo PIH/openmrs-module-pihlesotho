@@ -53,9 +53,12 @@
             <tr ng-repeat="chw in chwList">
                 <td>{{ chw.id }} </td>
                 <td>
-                    <a ng-show="chw.identifier" href="{{providerPage}}{{chw.personId}}">
+                    <a ng-show="chw.personId" href="{{providerPage}}{{chw.personId}}">
                         {{ chw.identifier }}
                     </a>
+                    <span ng-if="chw.identifier && !chw.personId">
+                        {{ chw.identifier }}
+                    </span>
                 </td>
                 <td>{{ chw.firstName }} </td>
                 <td>{{ chw.lastName }} </td>

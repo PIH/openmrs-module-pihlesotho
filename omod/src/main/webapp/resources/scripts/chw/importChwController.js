@@ -22,7 +22,8 @@ angular.module('importChwApp', ['ngDialog'])
                 },
                 PROVIDER_ATTRIBUTES: {
                     HEALTH_FACILITY: "BCB608BF-2EAF-4634-B639-C40A01F13315",
-                    PHONE_NUMBER: "30375A78-FA92-4C5C-A2FD-7E8339EC69CF"
+                    PHONE_NUMBER: "30375A78-FA92-4C5C-A2FD-7E8339EC69CF",
+                    CADRE: "70D039A3-DA50-43EA-8FC0-D250102A4793"
                 }
             };
 
@@ -35,6 +36,11 @@ angular.module('importChwApp', ['ngDialog'])
 
             var locationsMap = new Map([
                 ["BOBETE" , { code: "BOBET", uuid: "62094c52-1b76-102d-b823-000c29891b1e" }]
+            ]);
+
+            var cadreMap = new Map([
+                ["MMR" , { code: "MMRPA", uuid: "41F42339-CF48-4A1C-B0F2-B906DF1693F2" }],
+                ["VHW" , { code: "TB/HIV VHW", uuid: "A2FC530E-C5BF-4771-BA10-12B2F6DC8B09" }]
             ]);
 
             this.CONSTANTS = CONSTANTS;
@@ -106,29 +112,53 @@ angular.module('importChwApp', ['ngDialog'])
                 });
             };
 
+            this.addProviderAttribute = function(provider, type, value) {
+                if (provider && type && value) {
+                    var attribute = {
+                        attributeType: type,
+                        value: value
+                    };
+                    var url = CONSTANTS.URLS.PROVIDER + "/" + provider.uuid + "/attribute";
+                    return $http.post(url, attribute).then(function(resp) {
+                        if (resp.status == 201) {
+                            // provider attribute has been created
+                            return resp.data;
+                        } else {
+                            return null;
+                        }
+                    }, function (error) {
+                        console.log("failed to create provider attribute: "
+                            + "type =" + type + ", value = " + value  + JSON.stringify(error, undefined, 4));
+                    });
+                }
+
+            };
+
             this.addHealthFacility = function (provider, chw) {
                 if (provider && chw.healthCenter) {
                     var location = locationsMap.get(chw.healthCenter);
                     if (location) {
-                        var attribute = {
-                            attributeType: CONSTANTS.PROVIDER_ATTRIBUTES.HEALTH_FACILITY,
-                            value: location.uuid
-                        };
-                        var url = CONSTANTS.URLS.PROVIDER + "/" + provider.uuid + "/attribute";
-                        return $http.post(url, attribute).then(function(resp) {
-                            if (resp.status == 201) {
-                                // provider attribute has been created
-                                return resp.data;
-                            } else {
-                                return null;
-                            }
-                        }, function (error) {
-                            console.log("failed to create provider attribute: "
-                                + chw.healthCenter + JSON.stringify(error, undefined, 4));
+                        return this.addProviderAttribute(provider, CONSTANTS.PROVIDER_ATTRIBUTES.HEALTH_FACILITY, location.uuid);
+                    } else {
+                        return new Promise(function (resolve, reject) {
+                            resolve(chw);
                         });
                     }
                 }
-            }
+            };
+
+            this.addCadre = function (chw) {
+                if (chw.cadre) {
+                    var cadre = cadreMap.get(chw.cadre);
+                    if (cadre) {
+                        return this.addProviderAttribute(chw, CONSTANTS.PROVIDER_ATTRIBUTES.CADRE, cadre.uuid);
+                    } else {
+                        return new Promise(function (resolve, reject) {
+                            resolve(chw);
+                        });
+                    }
+                }
+            };
 
             this.addPhoneNumber = function (chw) {
                 if (chw.phoneNumber) {
@@ -151,12 +181,16 @@ angular.module('importChwApp', ['ngDialog'])
                         });
                     }
                 }
-            }
+            };
 
             this.getProvider = function (chw) {
-                return $http.get(CONSTANTS.URLS.PROVIDER + "?" 
-                    + CONSTANTS.PROVIDER_CUSTOM_REP + '&q=' 
-                    + chw.firstName + " " + chw.lastName).then(function(resp) {
+
+                var query = chw.identifier ? (chw.identifier):(chw.firstName + " " + chw.lastName);
+                 var url = CONSTANTS.URLS.PROVIDER + "?"
+                 + CONSTANTS.PROVIDER_CUSTOM_REP + '&q='
+                 + query;
+
+                return $http.get(url).then(function(resp) {
                     if (resp.status == 200) {
                         return resp.data;
                     } else {
@@ -341,7 +375,14 @@ angular.module('importChwApp', ['ngDialog'])
                                                         ImportChwService.addHealthFacility(respProvider, chw).then(function (providerHC) {
                                                             console.log("Health Facility has been added to the provider");
                                                             ImportChwService.addPhoneNumber(chw).then(function (providerPhone){
-                                                                deferred.resolve(newProvider);
+                                                                if (chw.cadre) {
+                                                                    ImportChwService.addCadre(chw).then( function(providerCadre){
+                                                                        deferred.resolve(newProvider);
+                                                                    }, function(errorCadre) {
+                                                                        console.log("failed to add Cadre attribute to provider" + JSON.stringify(errorCadre, undefined, 4));
+                                                                        deferred.reject(errorCadre);
+                                                                    });
+                                                                }
                                                             }, function (errorPhone) {
                                                                 console.log("failed to add Phone Number attribute to provider" + JSON.stringify(errorPhone, undefined, 4));
                                                                 deferred.reject(errorPhone);
