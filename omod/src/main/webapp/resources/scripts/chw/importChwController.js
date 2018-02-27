@@ -35,7 +35,13 @@ angular.module('importChwApp', ['ngDialog'])
             ]);
 
             var locationsMap = new Map([
-                ["BOBETE" , { code: "BOBET", uuid: "62094c52-1b76-102d-b823-000c29891b1e" }]
+                ["BOBETE" , { code: "BOBET", uuid: "62094c52-1b76-102d-b823-000c29891b1e" }],
+                ["LEBAKENG" , { code: "LEBAK", uuid: "62094e28-1b76-102d-b823-000c29891b1e" }],
+                ["MANAMANENG" , { code: "MANAM", uuid: "62095300-1b76-102d-b823-000c29891b1e" }],
+                ["METHALANENG" , { code: "METHA", uuid: "62095166-1b76-102d-b823-000c29891b1e" }],
+                ["NKAU" , { code: "NKAU", uuid: "62094a9a-1b76-102d-b823-000c29891b1e" }],
+                ["NOHANA" , { code: "NOHAN", uuid: "620948d8-1b76-102d-b823-000c29891b1e" }],
+                ["TLHANYAKU" , { code: "TLHAN", uuid: "62095634-1b76-102d-b823-000c29891b1e" }]
             ]);
 
             var cadreMap = new Map([
