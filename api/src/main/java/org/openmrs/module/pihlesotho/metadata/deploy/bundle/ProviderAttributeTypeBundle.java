@@ -7,6 +7,7 @@ import org.openmrs.api.ProviderService;
 import org.openmrs.customdatatype.datatype.DateDatatype;
 import org.openmrs.customdatatype.datatype.FreeTextDatatype;
 import org.openmrs.module.coreapps.customdatatype.CodedConceptDatatype;
+import org.openmrs.module.coreapps.customdatatype.LocationDatatype;
 import org.openmrs.module.metadatadeploy.bundle.AbstractMetadataBundle;
 import org.openmrs.module.metadatadeploy.bundle.Requires;
 import org.openmrs.module.pihlesotho.metadata.deploy.bundle.concept.ChwConcepts;
@@ -67,8 +68,8 @@ public class ProviderAttributeTypeBundle extends AbstractMetadataBundle {
 		
 		Concept facilityConcept = conceptService.getConceptByUuid(ChwConcepts.Concepts.FACILITY);
 		if (facilityConcept != null) {
-			install(providerAttributeType("Facility", "Facility", CodedConceptDatatype.class, facilityConcept.getConceptId()
-			        .toString(), 0, 1, ProviderAttributeTypes.FACILITY));
+			install(providerAttributeType("Health Facility", "Health Facility", LocationDatatype.class, "Health Facility",
+			    0, 1, ProviderAttributeTypes.FACILITY));
 		}
 		
 		Concept cadreConcept = conceptService.getConceptByUuid(ChwConcepts.Concepts.CADRE);
