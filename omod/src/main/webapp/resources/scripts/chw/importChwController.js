@@ -414,6 +414,7 @@ angular.module('importChwApp', ['ngDialog'])
                                             deferred.reject(identifierError);
                                         } );
                                     } else {
+                                        console.log("failed to find an identifier source for CHW");
                                         deferred.reject("failed to find an identifier source for CHW");
                                     }
 

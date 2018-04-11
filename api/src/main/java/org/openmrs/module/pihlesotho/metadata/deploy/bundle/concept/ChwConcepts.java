@@ -16,7 +16,7 @@ public class ChwConcepts extends VersionedPihConceptBundle {
 	
 	@Override
 	public int getVersion() {
-		return 3;
+		return 4;
 	}
 	
 	public static final class Concepts {
@@ -37,7 +37,7 @@ public class ChwConcepts extends VersionedPihConceptBundle {
 		
 		public static final String OWNERSHIP = "6748DA89-3A50-4E19-AB22-54E62C9BAB8E";
 		
-		public static final String FACILITY = "F5DABCB3-291C-41E8-A9A8-75A4593871E6";
+		public static final String FACILITY = "3B2E37E5-1537-42F9-95D6-ED8BE2C5260E";
 		
 		public static final String BOBETE = "F0873869-74C9-403B-952A-DC198AE592E0";
 		
@@ -53,10 +53,37 @@ public class ChwConcepts extends VersionedPihConceptBundle {
 		
 		public static final String TLHANYAKU = "866C7576-1189-4D2E-8737-10411DD53C1A";
 		
+		public static final String CHW_ACTIVE = "9DB7761A-B8D8-470B-BEEF-C966810A7981";
+		
+		public static final String CHW_INACTIVE = "4F911795-BDC8-4B57-A2DA-60FA96AAD32A";
+		
+		public static final String CHW_RETIRED = "135A22CF-75ED-4AB4-AD61-C37DFC5CBB5C";
+		
+		public static final String CHW_STATUS = "E8528CDF-3C7D-4D16-858A-98AAF21DD687";
 	}
 	
 	@Override
 	protected void installNewVersion() throws Exception {
+		
+		// CHW Status
+		Concept chwActive = install(new ConceptBuilder(Concepts.CHW_ACTIVE).datatype(notApplicable).conceptClass(misc)
+		        .name("64F0EBAA-87A5-42F2-95D6-C54CCDC663D8", "Active CHW", Locale.ENGLISH, ConceptNameType.FULLY_SPECIFIED)
+		        .description("E5857A33-5C53-4417-BBC6-2721E5BC4E14", "CHW Active Status", Locale.ENGLISH).build());
+		Concept chwInactive = install(new ConceptBuilder(Concepts.CHW_INACTIVE)
+		        .datatype(notApplicable)
+		        .conceptClass(misc)
+		        .name("3F7C861A-2862-4883-BCE1-8B3D6B64D7B3", "Inactive CHW", Locale.ENGLISH,
+		            ConceptNameType.FULLY_SPECIFIED)
+		        .description("AED68385-65DF-40C6-BF03-BE5A31FFFEF3", "CHW Inactive Status", Locale.ENGLISH).build());
+		Concept chwRetired = install(new ConceptBuilder(Concepts.CHW_RETIRED)
+		        .datatype(notApplicable)
+		        .conceptClass(misc)
+		        .name("6B520E50-31BC-4330-8558-B935EF624940", "Retired CHW", Locale.ENGLISH, ConceptNameType.FULLY_SPECIFIED)
+		        .description("F14BD17A-9FB4-488D-8E5B-6737F4D9F5D3", "CHW Retired Status", Locale.ENGLISH).build());
+		Concept chwStatus = install(new ConceptBuilder(Concepts.CHW_STATUS).datatype(coded).conceptClass(question)
+		        .name("46DE19D0-65B0-4158-AE4D-F795B46C1D33", "Status", Locale.ENGLISH, ConceptNameType.FULLY_SPECIFIED)
+		        .description("46DE19D0-65B0-4158-AE4D-F795B46C1D33", "CHW Status", Locale.ENGLISH)
+		        .answers(chwActive, chwInactive, chwRetired).build());
 		
 		Concept mmrpa = install(new ConceptBuilder(Concepts.MMRPA)
 		        .datatype(notApplicable)
@@ -197,11 +224,10 @@ public class ChwConcepts extends VersionedPihConceptBundle {
 		Concept facility = install(new ConceptBuilder(Concepts.FACILITY)
 		        .datatype(coded)
 		        .conceptClass(question)
-		        .name("479EF452-B2AC-43D5-92A0-7D00A8412504", "Facility", Locale.ENGLISH, ConceptNameType.FULLY_SPECIFIED)
+		        .name("61D80526-844A-4613-A282-C81DA9549CE8", "Facility CHW", Locale.ENGLISH,
+		            ConceptNameType.FULLY_SPECIFIED)
 		        // locale-preferred
-		        .description("EE349AAB-561F-4386-8620-7E05C9A73EF1", "Facility location", Locale.ENGLISH)
-		        .mapping(
-		            new ConceptMapBuilder("798F427D-0A78-4A8B-815A-52D1A5E743A7").type(sameAs).ensureTerm(pih, "Facility")
-		                    .build()).answers(bobete, lebakeng, manamaneng, methaleneng, nohana, nkau, tlhanyaku).build());
+		        .description("46FE173B-E8DA-4055-91D4-A5836DA4ED26", "CHW Facility location", Locale.ENGLISH)
+		        .answers(bobete, lebakeng, manamaneng, methaleneng, nohana, nkau, tlhanyaku).build());
 	}
 }
