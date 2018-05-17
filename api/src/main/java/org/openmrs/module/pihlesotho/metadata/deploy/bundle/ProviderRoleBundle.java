@@ -80,6 +80,11 @@ public class ProviderRoleBundle extends AbstractMetadataBundle {
 			providerAttributes.add(providerAttributeType);
 		}
 		providerAttributeType = providerService
+		        .getProviderAttributeTypeByUuid(ProviderAttributeTypeBundle.ProviderAttributeTypes.CHW_EDUCATION_LEVEL);
+		if (providerAttributeType != null) {
+			providerAttributes.add(providerAttributeType);
+		}
+		providerAttributeType = providerService
 		        .getProviderAttributeTypeByUuid(ProviderAttributeTypeBundle.ProviderAttributeTypes.CHW_STATUS);
 		if (providerAttributeType != null) {
 			providerAttributes.add(providerAttributeType);

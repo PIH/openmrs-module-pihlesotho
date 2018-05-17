@@ -44,6 +44,8 @@ public class ProviderAttributeTypeBundle extends AbstractMetadataBundle {
 		public static final String FACILITY = "BCB608BF-2EAF-4634-B639-C40A01F13315";
 		
 		public static final String CHW_STATUS = "B4ADD95A-812C-479D-94A0-93972120BF5F";
+		
+		public static final String CHW_EDUCATION_LEVEL = "4F1FFE0C-BE74-40ED-9EE3-17C4B8B33F60";
 	}
 	
 	/**
@@ -66,6 +68,12 @@ public class ProviderAttributeTypeBundle extends AbstractMetadataBundle {
 		if (dateHired != null) {
 			dateHired.setPreferredHandlerClassname("org.openmrs.web.attribute.handler.DateFieldGenDatatypeHandler");
 			providerService.saveProviderAttributeType(dateHired);
+		}
+		
+		Concept chwEducationLevel = conceptService.getConceptByUuid(ChwConcepts.Concepts.CHW_EDUCATION_LEVEL);
+		if (chwEducationLevel != null) {
+			install(providerAttributeType("CHW Education Level", "CHW Education Level", CodedConceptDatatype.class,
+			    chwEducationLevel.getConceptId().toString(), 0, 1, ProviderAttributeTypes.CHW_EDUCATION_LEVEL));
 		}
 		
 		Concept chwStatusConcept = conceptService.getConceptByUuid(ChwConcepts.Concepts.CHW_STATUS);

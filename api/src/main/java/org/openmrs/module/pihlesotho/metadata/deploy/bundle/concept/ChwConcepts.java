@@ -16,7 +16,7 @@ public class ChwConcepts extends VersionedPihConceptBundle {
 	
 	@Override
 	public int getVersion() {
-		return 4;
+		return 5;
 	}
 	
 	public static final class Concepts {
@@ -60,10 +60,50 @@ public class ChwConcepts extends VersionedPihConceptBundle {
 		public static final String CHW_RETIRED = "135A22CF-75ED-4AB4-AD61-C37DFC5CBB5C";
 		
 		public static final String CHW_STATUS = "E8528CDF-3C7D-4D16-858A-98AAF21DD687";
+		
+		public static final String ED_BASIC_PRIMARY = "38B49F7C-31F7-421C-A736-6FA6B534FCAC";
+		
+		public static final String ED_SECONDARY_SCHOOL = "8AFD7793-08D9-4985-85AC-871525D83756";
+		
+		public static final String ED_HIGH_SCHOOL = "CC6A8A77-E7F9-4934-8309-64D6A544DF95";
+		
+		public static final String ED_TERTIARY = "5A4043F2-92F2-43AE-8513-70004A49875E";
+		
+		public static final String CHW_EDUCATION_LEVEL = "6F1CFEB1-4388-4FF4-A431-AC5F6AEDC028";
 	}
 	
 	@Override
 	protected void installNewVersion() throws Exception {
+		
+		// CHW Highest Education Level
+		Concept edBasicPrimary = install(new ConceptBuilder(Concepts.ED_BASIC_PRIMARY)
+		        .datatype(notApplicable)
+		        .conceptClass(misc)
+		        .name("5FE6E0D9-CEA9-4B3D-A3D1-9DE1A590C9A0", "Basic Primary", Locale.ENGLISH,
+		            ConceptNameType.FULLY_SPECIFIED)
+		        .description("6DF0D8E0-B68E-4FE2-85CA-AAEB2495EB82", "CHW Basic Primary Education", Locale.ENGLISH).build());
+		Concept edSecondarySchool = install(new ConceptBuilder(Concepts.ED_SECONDARY_SCHOOL)
+		        .datatype(notApplicable)
+		        .conceptClass(misc)
+		        .name("AFF914B2-BE2F-4FEA-9098-37A6BCCE2F83", "Secondary School", Locale.ENGLISH,
+		            ConceptNameType.FULLY_SPECIFIED)
+		        .description("4926DC9C-E11E-4E99-83EB-06950F8807BD", "CHW Secondary School Education", Locale.ENGLISH)
+		        .build());
+		Concept edHighSchool = install(new ConceptBuilder(Concepts.ED_HIGH_SCHOOL)
+		        .datatype(notApplicable)
+		        .conceptClass(misc)
+		        .name("CB59FC1D-D9F6-4F23-849D-222563345E73", "High School", Locale.ENGLISH, ConceptNameType.FULLY_SPECIFIED)
+		        .description("B26EC0C9-BF90-4B38-8B57-046A19BD69E2", "CHW High School Education", Locale.ENGLISH).build());
+		Concept edTertiary = install(new ConceptBuilder(Concepts.ED_TERTIARY).datatype(notApplicable).conceptClass(misc)
+		        .name("D472D1D0-5465-44B7-B48A-C017130A9DCF", "Tertiary", Locale.ENGLISH, ConceptNameType.FULLY_SPECIFIED)
+		        .description("D0FBF93C-9509-403C-9FA7-06AFDAAD7514", "CHW Tertiary Education", Locale.ENGLISH).build());
+		Concept chwEducationLevel = install(new ConceptBuilder(Concepts.CHW_EDUCATION_LEVEL)
+		        .datatype(coded)
+		        .conceptClass(question)
+		        .name("325A5E42-FB44-4EC1-BCF5-EC3688B07732", "Highest Education Level", Locale.ENGLISH,
+		            ConceptNameType.FULLY_SPECIFIED)
+		        .description("3B007231-DE28-4A18-82C4-21B05BD61011", "CHW Education Level", Locale.ENGLISH)
+		        .answers(edBasicPrimary, edSecondarySchool, edHighSchool, edTertiary).build());
 		
 		// CHW Status
 		Concept chwActive = install(new ConceptBuilder(Concepts.CHW_ACTIVE).datatype(notApplicable).conceptClass(misc)
