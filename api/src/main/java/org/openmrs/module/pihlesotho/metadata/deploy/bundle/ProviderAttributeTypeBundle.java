@@ -35,6 +35,8 @@ public class ProviderAttributeTypeBundle extends AbstractMetadataBundle {
 		
 		public static final String NUMBER_OF_HOUSEHOLDS = "0c267ae8-f793-4cf8-9b27-93accaa45d86";
 		
+		public static final String VILLAGE = "6B5F7603-AB0E-4548-8042-236E011C07A7";
+		
 		public static final String DATE_OF_TRAINING = "c8ef8a16-a8cd-4748-b0ea-e8a1ec503fbb";
 		
 		public static final String CADRE = "70D039A3-DA50-43EA-8FC0-D250102A4793";
@@ -61,6 +63,9 @@ public class ProviderAttributeTypeBundle extends AbstractMetadataBundle {
 		
 		install(providerAttributeType("Households", "Number of households monitored by a VHW", FreeTextDatatype.class, null,
 		    0, 1, ProviderAttributeTypes.NUMBER_OF_HOUSEHOLDS));
+		
+		install(providerAttributeType("Village", "The village of the CHW", FreeTextDatatype.class, null, 0, 1,
+		    ProviderAttributeTypes.VILLAGE));
 		
 		ProviderAttributeType dateHired = install(providerAttributeType("Recruitment Training Date",
 		    "The date the provider was provided training.", DateDatatype.class, null, 0, 1,
