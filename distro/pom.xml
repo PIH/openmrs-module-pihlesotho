@@ -108,6 +108,11 @@
                 </dependency>
                 <dependency>
                     <groupId>org.openmrs.module</groupId>
+                    <artifactId>pihlesotho-omod</artifactId>
+                    <version>${project.parent.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.openmrs.module</groupId>
                     <artifactId>providermanagement-omod</artifactId>
                     <version>${providermanagementVersion}</version>
                 </dependency>
