@@ -7,7 +7,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<groupId>org.openmrs.module</groupId>
-	<artifactId>pihmalawi-omod</artifactId>
+	<artifactId>pihlesotho-omod</artifactId>
 	<packaging>jar</packaging>
 	<name>PIH Lesotho Configurations OMOD</name>
 	<description>Omod submodule for PIH Lesotho Configurations</description>
