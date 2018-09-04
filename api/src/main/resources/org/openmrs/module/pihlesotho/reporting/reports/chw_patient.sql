@@ -1,11 +1,8 @@
-DELIMITER $$
-DROP PROCEDURE IF EXISTS `chw_patient`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `chw_patient`()
-BEGIN
+-- ## report_uuid = 64a8d5ca-a7a0-11e8-a948-0242ac110001
+-- ## design_uuid = 56d9f6b5-a7a0-11e8-a948-0242ac110001
+-- ## report_name = CHW - Patient
+-- ## report_description = CHW Patient Report.
 
-select 'provider_identifier', 'Provider_role', 'Provider_Name', 'Patient_Name', 'Patient_identifier'
-, 'Current_HIV_State', 'CHW_present_last_pickup'
-UNION ALL
 select 
 p.identifier "provider_identifier",pr.name "Provider_role", CONCAT(pn.given_name, ' ',pn.family_name) "Provider_Name", 
 CONCAT(pnc.given_name, ' ',pnc.family_name) "Patient_Name",pid.identifier "Patient_identifier",
@@ -41,10 +38,4 @@ LEFT OUTER JOIN obs o on o.obs_id = (select obs_id from obs o2 where o2.person_i
 and o2.concept_id = (select concept_id from concept where uuid = '3ce13430-26fe-102b-80cb-0017a47871b2') -- COMMUNITY HEALTH WORKER PRESENT concept
 order by o2.obs_datetime desc limit 1) 
 LEFT OUTER JOIN concept_name cn_present on cn_present.concept_id = o.value_coded and cn_present.locale = 'en' and cn_present.locale_preferred = 1 and cn_present.voided = 0
- INTO OUTFILE '/tmp/chwPatient.csv'
-FIELDS TERMINATED BY ','
-OPTIONALLY ENCLOSED BY '\"'
-LINES TERMINATED BY '\n';
-
-END$$
-DELIMITER ;
+;

@@ -63,8 +63,8 @@
 		<metadatasharingVersion>1.2.2</metadatasharingVersion>
 		<providermanagementVersion>2.11.0-SNAPSHOT</providermanagementVersion>
 		<registrationappVersion>1.9.0-SNAPSHOT</registrationappVersion>
-		<registrationcoreVersion>1.6</registrationcoreVersion>
-		<reportingVersion>1.12.0</reportingVersion>
+		<registrationcoreVersion>1.9.0-SNAPSHOT</registrationcoreVersion>
+		<reportingVersion>1.17.0-SNAPSHOT</reportingVersion>
 		<reportingcompatibilityVersion>1.5.8</reportingcompatibilityVersion>
 		<serializationVersion>0.2.12</serializationVersion>
 		<uicommonsVersion>2.3.0</uicommonsVersion>

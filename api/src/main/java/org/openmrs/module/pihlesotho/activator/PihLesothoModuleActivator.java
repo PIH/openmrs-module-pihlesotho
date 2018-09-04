@@ -46,6 +46,7 @@ public class PihLesothoModuleActivator extends BaseModuleActivator {
 	public List<Initializer> getInitializers() {
 		List<Initializer> initializers = new ArrayList<Initializer>();
 		initializers.add(new MetadataInitializer());
+		initializers.add(new ReportInitializer());
 		return initializers;
 	}
 	

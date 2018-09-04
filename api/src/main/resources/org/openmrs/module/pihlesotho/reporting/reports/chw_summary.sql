@@ -1,11 +1,8 @@
-DELIMITER $$
-DROP PROCEDURE IF EXISTS `chw_summary`$$
+-- ## report_uuid = 7ec62ea3-a7b9-11e8-a948-0242ac110001
+-- ## design_uuid = 7fb8c963-a7b9-11e8-a948-0242ac110001
+-- ## report_name = CHW - Summary
+-- ## report_description = CHW Summary Report.
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `chw_summary`()
-BEGIN
-select 'Provider_id', 'person_id', 'Provider_role', 'Provider_name', 'Patient_count'
-, 'Supervisor_Name', 'Supervisor_id', 'relationship_id', 'Coordinator_Name', 'Coordinator_id'
-UNION ALL 
 select distinct p.identifier "Provider_id", p.person_id,  pr.name "Provider_role", CONCAT(pn.given_name, ' ',pn.family_name) "Provider_name", 
 COALESCE(c.patients,0) "Patient_count", 
 CONCAT(pn_sup.given_name, ' ',pn_sup.family_name) "Supervisor_Name" , p_sup.identifier "Supervisor_id", r_sup.relationship_id,
@@ -32,12 +29,5 @@ LEFT OUTER JOIN  relationship r_co on r_co.person_b = p.person_id and r_co.voide
 LEFT OUTER JOIN provider p_co on p_co.person_id = r_co.person_a and p_co.provider_role_id = 
   (select provider_role_id from providermanagement_provider_role where uuid = 'E050AA6E-AFFB-4D31-B00F-CE118ECDEF18') -- Coordinator role
 LEFT OUTER JOIN person_name pn_co on pn_co.person_name_id = 
-             (select person_name_id from person_name pn_co2 where pn_co2.person_id = p_co.person_id and pn_co2.voided = 0 order by pn_co2.preferred desc, pn_co2.date_created desc limit 1)      
- INTO OUTFILE '/tmp/chwSummary.csv'
-FIELDS TERMINATED BY ','
-OPTIONALLY ENCLOSED BY '\"'
-LINES TERMINATED BY '\n';
-
-
-END$$
-DELIMITER ;
+             (select person_name_id from person_name pn_co2 where pn_co2.person_id = p_co.person_id and pn_co2.voided = 0 order by pn_co2.preferred desc, pn_co2.date_created desc limit 1)
+;
