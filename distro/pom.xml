@@ -115,6 +115,7 @@
                     <groupId>org.openmrs.module</groupId>
                     <artifactId>providermanagement-omod</artifactId>
                     <version>${providermanagementVersion}</version>
+                    <scope>provided</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.openmrs.module</groupId>
