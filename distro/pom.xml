@@ -119,6 +119,12 @@
                 </dependency>
                 <dependency>
                     <groupId>org.openmrs.module</groupId>
+                    <artifactId>regimenpickup-omod</artifactId>
+                    <version>${regimenpickupVersion}</version>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.openmrs.module</groupId>
                     <artifactId>registrationapp-omod</artifactId>
                     <version>${registrationappVersion}</version>
                     <scope>provided</scope>
