@@ -47,12 +47,21 @@
 		<aware_of_module>org.openmrs.module.legacyui</aware_of_module>
 	</aware_of_modules>
 
-
 	<!-- Extensions -->
 	<extension>
 		<point>org.openmrs.admin.list</point>
 		<class>org.openmrs.module.pihlesotho.extension.html.AdminList</class>
 	</extension>
+
+    <extension>
+        <point>org.openmrs.admin.maintenance.localHeader</point>
+        <class>org.openmrs.module.pihlesotho.extension.html.DataEntryStatisticsAdminList</class>
+    </extension>
+
+    <privilege>
+        <name>View Data Entry Statistics</name>
+        <description>Able to View Data Entry Statistics</description>
+    </privilege>
 	
 	<!-- Internationalization -->
 	<!-- All message codes should start with @MODULE_ID@.* -->

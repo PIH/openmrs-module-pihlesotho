@@ -37,5 +37,21 @@
         <property name="moduleId" value="${project.parent.artifactId}"/>
     </bean>
 
+    <bean id="pihlesothoDataEntryStatisticsUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="module/pihlesotho/dataEntryStatistics.list">dataEntryStatisticsController</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="dataEntryStatisticsController" class="org.openmrs.module.pihlesotho.web.controller.DataEntryStatisticsController">
+        <property name="sessionForm"><value>true</value></property>
+        <property name="commandName"><value>command</value></property>
+        <property name="formView"><value>/module/pihlesotho/dataEntryStatistics</value></property>
+        <property name="successView"><value>dataEntryStatistics.list</value></property>
+        <property name="svc"><ref bean="pihlesothoDataEntryStatisticsService" /></property>
+    </bean>
+
 </beans>
 
