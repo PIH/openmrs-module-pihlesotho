@@ -44,7 +44,6 @@
 		<appuiVersion>1.8.0</appuiVersion>
 		<calculationVersion>1.2</calculationVersion>
 		<coreappsVersion>1.20.0-SNAPSHOT</coreappsVersion>
-		<dataentrystatisticsVersion>1.3.2</dataentrystatisticsVersion>
 		<emrapiVersion>1.25.0-SNAPSHOT</emrapiVersion>
 		<eventVersion>2.5</eventVersion>
 		<htmlformentryVersion>3.3.2</htmlformentryVersion>
