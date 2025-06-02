@@ -1,9 +1,9 @@
 package org.openmrs.module.pihlesotho.provider;
 
+import org.openmrs.Provider;
 import org.springframework.stereotype.Component;
 import org.openmrs.module.emrapi.account.ProviderIdentifierGenerator;
 import org.openmrs.module.idgen.SequentialIdentifierGenerator;
-import org.openmrs.module.providermanagement.Provider;
 
 @Component
 /// this is autowired in the DomainWrapperFactory (which injects it into Account Domain Wrapper instances)
