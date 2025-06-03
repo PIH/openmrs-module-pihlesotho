@@ -12,11 +12,6 @@
 	<name>PIH Lesotho Configurations OMOD</name>
 	<description>Omod submodule for PIH Lesotho Configurations</description>
 
-	<properties>
-		<gem.home>${basedir}/.rubygems</gem.home>
-		<gem.path>${basedir}/.rubygems</gem.path>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>${project.parent.groupId}</groupId>
@@ -62,25 +57,10 @@
 			<version>${webservicesRestVersion}</version>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.openmrs.module</groupId>
 			<artifactId>webservices.rest-omod-1.9</artifactId>
 			<version>${webservicesRestVersion}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>rubygems</groupId>
-			<artifactId>compass</artifactId>
-			<version>0.11.7</version>
-			<type>gem</type>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>rubygems</groupId>
-			<artifactId>sass</artifactId>
-			<version>3.2.5</version>
-			<type>gem</type>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
@@ -163,44 +143,7 @@
 							<outputDirectory>${project.build.directory}/classes</outputDirectory>
 						</configuration>
 					</execution>
-					<execution>
-						<id>Fetch SASS sources from uicommons</id>
-						<goals>
-							<goal>unpack</goal>
-						</goals>
-						<phase>generate-resources</phase>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>uicommons-scss</artifactId>
-									<version>${uicommonsVersion}</version>
-									<type>zip</type>
-									<overWrite>true</overWrite>
-									<outputDirectory>src/main/compass/sass-external</outputDirectory>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>de.saumya.mojo</groupId>
-				<artifactId>gem-maven-plugin</artifactId>
-				<version>2.0.1</version>
-				<extensions>true</extensions>
-				<executions>
-					<execution>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<phase>generate-resources</phase>
-					</execution>
-				</executions>
-				<configuration>
-					<jrubyVersion>1.7.10</jrubyVersion>
-					<execArgs>${gem.home}/bin/compass compile ${basedir}/src/main/compass</execArgs>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
