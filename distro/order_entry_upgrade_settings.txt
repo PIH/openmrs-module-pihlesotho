@@ -1,0 +1,11 @@
+mg=7139
+ml=7140
+tab(s)=7141
+1/day\ x\ 7\ days/week=7142
+2/day\ x\ 7\ days/week=7143
+3/day\ x\ 7\ days/week=7144
+4/day\ x\ 7\ days/week=7145
+5/day\ x\ 7\ days/week=7146
+10/day\ x\ 7\ days/week=7147
+1/day\ x\ 2\ days/week=7148
+?/day\ x\ 7\ days/week=7149
