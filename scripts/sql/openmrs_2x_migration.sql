@@ -111,3 +111,6 @@ WHERE e.encounter_type = 22
 -- All discontinued orders must have a discontinued date set
 update orders set discontinued_date=start_date where discontinued=1 and discontinued_date is null;
 update orders set discontinued_by=creator where discontinued=1 and discontinued_by is null;
+
+-- Enable exit from care
+update global_property set property_value = 'true' where property = 'legacyui.enableExitFromCare';
