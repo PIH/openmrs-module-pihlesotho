@@ -13,63 +13,24 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.BaseModuleActivator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * This class contains the logic that is run every time this module is either started or shutdown
  */
 public class PihLesothoModuleActivator extends BaseModuleActivator {
 	
-	private Log log = LogFactory.getLog(this.getClass());
-	
+	private final Log log = LogFactory.getLog(this.getClass());
+
+	private final ReportInitializer reportInitializer = new ReportInitializer();
+
 	@Override
-	public void contextRefreshed() {
-		log.info("PIH Lesotho Module refreshed");
-	}
-	
-	@Override
-	public void willRefreshContext() {
-		log.info("Refreshing PIH Lesotho Module");
-	}
-	
-	@Override
-	public void willStart() {
-		log.info("Starting PIH Lesotho Module");
-	}
-	
-	@Override
-	public void willStop() {
-		log.info("Stopping PIH Lesotho Module");
-	}
-	
-	public List<Initializer> getInitializers() {
-		List<Initializer> initializers = new ArrayList<Initializer>();
-		initializers.add(new MetadataInitializer());
-		initializers.add(new ReportInitializer());
-		return initializers;
-	}
-	
-	/**
-	 * @see #started()
-	 */
 	public void started() {
-		
+		reportInitializer.started();
 		log.info("Started PIH Lesotho Module");
-		for (Initializer initializer : getInitializers()) {
-			initializer.started();
-		}
 	}
-	
-	/**
-	 * @see #shutdown()
-	 */
-	public void shutdown() {
-		
+
+	@Override
+	public void stopped() {
 		log.info("Shutdown PIH Lesotho Module");
-		for (int i = getInitializers().size() - 1; i >= 0; i--) {
-			getInitializers().get(i).stopped();
-		}
 	}
-	
+
 }
