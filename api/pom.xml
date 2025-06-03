@@ -12,13 +12,4 @@
 	<name>PIH Lesotho Configurations API</name>
 	<description>API project for PIH Lesotho Configurations</description>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>coreapps-api</artifactId>
-			<version>${coreappsVersion}</version>
-		</dependency>
-
-	</dependencies>
-
 </project>

@@ -27,14 +27,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.openmrs.web</groupId>
-			<artifactId>openmrs-web</artifactId>
-			<version>${openMRSVersion}</version>
-			<type>jar</type>
-			<scope>test</scope>
-			<classifier>tests</classifier>
-		</dependency>
-		<dependency>
 			<groupId>org.openmrs.module</groupId>
 			<artifactId>appui-omod</artifactId>
 			<version>${appuiVersion}</version>

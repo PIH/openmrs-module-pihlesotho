@@ -16,12 +16,6 @@
     <dependencies>
         <dependency>
             <groupId>org.openmrs.module</groupId>
-            <artifactId>addresshierarchy-omod</artifactId>
-            <version>${addresshierarchyVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
             <artifactId>appframework-omod</artifactId>
             <version>${appframeworkVersion}</version>
             <scope>provided</scope>
@@ -95,18 +89,6 @@
             <groupId>org.openmrs.module</groupId>
             <artifactId>providermanagement-omod</artifactId>
             <version>${providermanagementVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>registrationapp-omod</artifactId>
-            <version>${registrationappVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>registrationcore-omod</artifactId>
-            <version>${registrationcoreVersion}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
