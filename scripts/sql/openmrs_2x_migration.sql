@@ -72,7 +72,7 @@ values
     (uuid(), 7150, 7141, 3, 1, now())
 ;
 
-update global_property set property_value = (select uuid from concept where concept_id = 7150) where property = 'order.drugDosingUnitsConceptUuid';
+insert into global_property (uuid, property, property_value) values (uuid(), 'order.drugDosingUnitsConceptUuid', (select uuid from concept where concept_id = 7150));
 
 -- Set the order start date to the date midnight of the date_created, assumption that all orders are date-based in current system
 UPDATE orders set start_date = date(date_created) where start_date is null;
@@ -113,4 +113,4 @@ update orders set discontinued_date=start_date where discontinued=1 and disconti
 update orders set discontinued_by=creator where discontinued=1 and discontinued_by is null;
 
 -- Enable exit from care
-update global_property set property_value = 'true' where property = 'legacyui.enableExitFromCare';
+insert into global_property (uuid, property, property_value) values (uuid(), 'legacyui.enableExitFromCare', 'true');
