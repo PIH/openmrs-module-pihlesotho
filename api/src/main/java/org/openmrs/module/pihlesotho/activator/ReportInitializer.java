@@ -41,14 +41,10 @@ import java.util.List;
 /**
  * Initializes reports
  */
-public class ReportInitializer implements Initializer {
+public class ReportInitializer {
 	
 	protected static final Log log = LogFactory.getLog(ReportInitializer.class);
-	
-	/**
-	 * @see Initializer#started()
-	 */
-	@Override
+
 	public synchronized void started() {
 		loadReportsFromCode();
 		loadReportsFromClasspath();
@@ -186,12 +182,5 @@ public class ReportInitializer implements Initializer {
 		File configDir = OpenmrsUtil.getDirectoryInApplicationDataDirectory("configuration");
 		File lesothoDir = new File(configDir, "pihlesotho");
 		return new File(lesothoDir, subdir);
-	}
-	
-	/**
-	 * @see Initializer#stopped()
-	 */
-	@Override
-	public void stopped() {
 	}
 }

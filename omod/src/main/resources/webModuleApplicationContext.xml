@@ -53,5 +53,15 @@
         <property name="svc"><ref bean="pihlesothoDataEntryStatisticsService" /></property>
     </bean>
 
+    <bean id="regimenPickupUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="order"><value>30</value></property>
+        <property name="mappings">
+            <props>
+                <prop key="**/regimenPickupPortlet.portlet">regimenPickupPortletController</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="regimenPickupPortletController" class="org.openmrs.module.pihlesotho.web.RegimenPickupPortletController" />
+
 </beans>
 
