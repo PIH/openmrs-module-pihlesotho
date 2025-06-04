@@ -114,3 +114,5 @@ update orders set discontinued_by=creator where discontinued=1 and discontinued_
 
 -- Enable exit from care
 insert into global_property (uuid, property, property_value) values (uuid(), 'legacyui.enableExitFromCare', 'true');
+
+insert into global_property (uuid, property, property_value) values (uuid(), 'regimenpickup.defaultProviderRole', 'Unknown');
