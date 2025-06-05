@@ -44,7 +44,7 @@
 		<coreappsVersion>2.1.0</coreappsVersion>
 		<emrapiVersion>2.3.0</emrapiVersion>
 		<eventVersion>3.0.0</eventVersion>
-		<htmlformentryVersion>5.5.0</htmlformentryVersion>
+		<htmlformentryVersion>6.0.0-SNAPSHOT</htmlformentryVersion>
 		<htmlwidgetsVersion>1.11.0</htmlwidgetsVersion>
 		<idgenVersion>4.14.0</idgenVersion>
 		<legacyuiVersion>1.23.0</legacyuiVersion>
