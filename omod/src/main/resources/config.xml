@@ -65,6 +65,11 @@
         <name>View Data Entry Statistics</name>
         <description>Able to View Data Entry Statistics</description>
     </privilege>
+
+	<extension>
+		<point>org.openmrs.gutter.tools</point>
+		<class>org.openmrs.module.pihlesotho.extension.html.ProviderListGutterExtension</class>
+	</extension>
 	
 	<!-- Internationalization -->
 	<!-- All message codes should start with @MODULE_ID@.* -->
