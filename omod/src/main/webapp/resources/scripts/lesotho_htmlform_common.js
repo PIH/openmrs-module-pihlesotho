@@ -1,4 +1,3 @@
-<!--
 /*
 author: Andrew Chi
 date: 2011-APR-10
@@ -306,5 +305,3 @@ if(!document.getElementById("xmlData")){
 }
 
 mainFunction();
-
-//-->

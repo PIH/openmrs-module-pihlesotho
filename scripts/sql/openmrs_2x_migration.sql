@@ -116,3 +116,9 @@ update orders set discontinued_by=creator where discontinued=1 and discontinued_
 insert into global_property (uuid, property, property_value) values (uuid(), 'legacyui.enableExitFromCare', 'true');
 
 insert into global_property (uuid, property, property_value) values (uuid(), 'regimenpickup.defaultProviderRole', 'Unknown');
+
+-- Forms warn if locale is en US rather than en GB, so we should set that as the default
+update global_property set property_value = 'en_GB' where property = 'default_locale';
+
+-- Update htmlforms to refer to new JS location
+update htmlformentry_html_form set xml_data = replace(xml_data, '/openmrs/lesotho_htmlform_common.js', '/openmrs/moduleResources/pihlesotho/scripts/lesotho_htmlform_common.js');
