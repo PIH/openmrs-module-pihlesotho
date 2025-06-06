@@ -153,6 +153,12 @@
 		</description>
 	</globalProperty>
 
+	<globalProperty>
+		<property>pihlesotho.logPrivilegeChecksForUsers</property>
+		<defaultValue></defaultValue>
+		<description>Optional comma-delimited list of username to log privilege checks for</description>
+	</globalProperty>
+
 	<dwr>
 		<allow>
 			<create creator="new" javascript="RegimenPickupDWRService">

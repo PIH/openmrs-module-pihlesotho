@@ -11,7 +11,9 @@ package org.openmrs.module.pihlesotho.activator;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.BaseModuleActivator;
+import org.openmrs.module.pihlesotho.PihLesothoPrivilegeHelper;
 
 /**
  * This class contains the logic that is run every time this module is either started or shutdown
@@ -21,16 +23,19 @@ public class PihLesothoModuleActivator extends BaseModuleActivator {
 	private final Log log = LogFactory.getLog(this.getClass());
 
 	private final ReportInitializer reportInitializer = new ReportInitializer();
+	private final PihLesothoPrivilegeHelper privilegeHelper = new PihLesothoPrivilegeHelper();
 
 	@Override
 	public void started() {
 		reportInitializer.started();
 		log.info("Started PIH Lesotho Module");
+		Context.getAdministrationService().addGlobalPropertyListener(privilegeHelper);
 	}
 
 	@Override
 	public void stopped() {
 		log.info("Shutdown PIH Lesotho Module");
+		Context.getAdministrationService().removeGlobalPropertyListener(privilegeHelper);
 	}
 
 }
