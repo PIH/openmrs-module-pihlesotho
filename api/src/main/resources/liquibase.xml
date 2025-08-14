@@ -6,7 +6,7 @@
                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 
 
-    <changeSet id="20250812-migrate-numeric-boolean" author="ball">
+    <changeSet id="20250814-migrate-numeric-boolean" author="ball">
         <comment>
             For numeric boolean, migrated to coded true/false values.
         </comment>
@@ -15,9 +15,10 @@
 
             create temporary table temp_bool_obs
                 select
-                    obs_id, concept_id
-                  from obs o
-                 where o.concept_id IN (2121, 5271, 6111, 6998)
+                    o.obs_id, c.concept_id
+                  from obs o, concept c
+                 where c.concept_id = o.concept_id
+                   and c.datatype_id = (select cd.concept_datatype_id from concept_datatype cd where name like 'Boolean')
                    and o.value_numeric is not null
                    and o.voided = 0
                    ;
@@ -41,7 +42,7 @@
             select
                 o.person_id,
                 t.concept_id,
-                (select concept_id from concept_name where name like 'false' and locale = 'en' and locale_preferred = 1 and voided = 0),
+                (select cn.concept_id from concept_name cn where cn.name like 'false' and cn.locale = 'en' and cn.locale_preferred = 1 and cn.voided = 0),
                 o.encounter_id,
                 o.obs_datetime,
                 o.location_id,
@@ -75,7 +76,7 @@
             select
                 o.person_id,
                 t.concept_id,
-                (select concept_id from concept_name where name like 'true' and locale = 'en' and locale_preferred = 1 and voided = 0),
+                (select cn.concept_id from concept_name cn where cn.name like 'true' and cn.locale = 'en' and cn.locale_preferred = 1 and cn.voided = 0),
                 o.encounter_id,
                 o.obs_datetime,
                 o.location_id,
@@ -96,7 +97,7 @@
                set voided = 1,
                    voided_by = 1,
                    date_voided = now(),
-                   void_reason = 'migrated to coded obs';
+                   void_reason = 'LSO-192 migrated to coded obs';
 
         </sql>
     </changeSet>
