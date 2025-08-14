@@ -18,7 +18,7 @@
                     o.obs_id, c.concept_id
                   from obs o, concept c
                  where c.concept_id = o.concept_id
-                   and c.datatype_id = (select cd.concept_datatype_id from concept_datatype cd where name like 'Boolean')
+                   and c.datatype_id = (select cd.concept_datatype_id from concept_datatype cd where cd.name like 'Boolean')
                    and o.value_numeric is not null
                    and o.voided = 0
                    ;
