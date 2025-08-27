@@ -6,7 +6,7 @@
                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 
 
-    <changeSet id="20250814-migrate-numeric-boolean" author="ball">
+    <changeSet id="20250827-migrate-numeric-boolean" author="ball">
         <comment>
             For numeric boolean, migrated to coded true/false values.
         </comment>
@@ -15,7 +15,10 @@
 
             create temporary table temp_bool_obs
                 select
-                    o.obs_id, c.concept_id
+                    o.obs_id, o.person_id, o.encounter_id,
+                    o.concept_id, o.value_numeric,
+                    o.obs_datetime, o.location_id, o.obs_group_id, o.creator, o.date_created,
+                    o.status
                   from obs o, concept c
                  where c.concept_id = o.concept_id
                    and c.datatype_id = (select cd.concept_datatype_id from concept_datatype cd where cd.name like 'Boolean')
@@ -40,22 +43,21 @@
                  previous_version
                 )
             select
-                o.person_id,
+                t.person_id,
                 t.concept_id,
                 (select cn.concept_id from concept_name cn where cn.name like 'false' and cn.locale = 'en' and cn.locale_preferred = 1 and cn.voided = 0),
-                o.encounter_id,
-                o.obs_datetime,
-                o.location_id,
-                o.obs_group_id,
-                o.creator,
-                o.date_created,
+                t.encounter_id,
+                t.obs_datetime,
+                t.location_id,
+                t.obs_group_id,
+                t.creator,
+                t.date_created,
                 0,
                 uuid(),
-                o.status,
+                t.status,
                 t.obs_id
-            from obs o
-                inner join temp_bool_obs t on t.obs_id = o.obs_id
-            where o.value_numeric = 0;
+            from temp_bool_obs t
+            where t.value_numeric = 0;
 
             -- insert obs with coded TRUE
             insert into obs
@@ -74,22 +76,21 @@
                 previous_version
                )
             select
-                o.person_id,
+                t.person_id,
                 t.concept_id,
                 (select cn.concept_id from concept_name cn where cn.name like 'true' and cn.locale = 'en' and cn.locale_preferred = 1 and cn.voided = 0),
-                o.encounter_id,
-                o.obs_datetime,
-                o.location_id,
-                o.obs_group_id,
-                o.creator,
-                o.date_created,
+                t.encounter_id,
+                t.obs_datetime,
+                t.location_id,
+                t.obs_group_id,
+                t.creator,
+                t.date_created,
                 0,
                 uuid(),
-                o.status,
+                t.status,
                 t.obs_id
-            from obs o
-            inner join temp_bool_obs t on t.obs_id = o.obs_id
-            where o.value_numeric = 1;
+            from temp_bool_obs t
+            where t.value_numeric = 1;
 
             -- void numeric boolean obs
             update obs o
