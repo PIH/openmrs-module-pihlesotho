@@ -8,9 +8,9 @@
     </parent>
 
     <artifactId>pihlesotho-config</artifactId>
-    <packaging>jar</packaging>
     <name>PIH Lesotho Configuration</name>
     <description>Configuration for the PIH Lesotho module and distribution</description>
+    <packaging>pom</packaging>
 
     <build>
         <filters>
