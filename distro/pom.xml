@@ -142,7 +142,6 @@
             <!-- Add the openmrs-distro.properties file into the artifact jar and apply variable replacements -->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.2.0</version>
                 <configuration>
                     <propertiesEncoding>UTF-8</propertiesEncoding>
                     <resources>
@@ -162,7 +161,7 @@
             <plugin>
                 <groupId>org.openmrs.maven.plugins</groupId>
                 <artifactId>openmrs-sdk-maven-plugin</artifactId>
-                <version>6.1.0</version>
+                <version>6.7.0</version>
                 <executions>
                     <execution>
                         <id>build-distro</id>
@@ -181,7 +180,7 @@
             <!-- Assemble omods, owas, spas, etc into a zip file -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.8.0</version>
                 <configuration>
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptors>

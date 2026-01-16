@@ -303,16 +303,17 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>3.2.0</version>
                     <configuration>
                         <autoVersionSubmodules>true</autoVersionSubmodules>
-                        <tagNameFormat>@{project.version}</tagNameFormat>
+						<projectVersionPolicyId>SemVerVersionPolicy</projectVersionPolicyId>
+                        <tagNameFormat>{project.version}</tagNameFormat>
                     </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>2.9.1</version>
+                    <version>3.12.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -330,12 +331,13 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>2.4</version>
+                    <version>3.9.0</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
+					<version>3.4.0</version>
                     <configuration>
                         <includeEmptyDirs>true</includeEmptyDirs>
                     </configuration>
@@ -344,16 +346,13 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.5</version>
-                    <configuration>
-                        <!-- Some tests are locale specific -->
-                        <argLine>-Duser.language=en -Duser.region=US</argLine>
-                    </configuration>
+                    <version>3.5.4</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
+					<version>3.5.0</version>
                     <executions>
                         <execution>
                             <goals>
