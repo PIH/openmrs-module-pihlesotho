@@ -20,10 +20,12 @@ public class PihLesothoModuleActivator extends BaseModuleActivator {
 	
 	private final Log log = LogFactory.getLog(this.getClass());
 
+	private final AuthenticationInitializer authenticationInitializer = new AuthenticationInitializer();
 	private final ReportInitializer reportInitializer = new ReportInitializer();
 
 	@Override
 	public void started() {
+		authenticationInitializer.started();
 		reportInitializer.started();
 		log.info("Started PIH Lesotho Module");
 	}
