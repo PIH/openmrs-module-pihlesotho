@@ -141,6 +141,7 @@
 
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
                 <configuration>
                     <propertiesEncoding>UTF-8</propertiesEncoding>
                     <resources>
@@ -159,18 +160,16 @@
             <plugin>
                 <groupId>org.openmrs.maven.plugins</groupId>
                 <artifactId>openmrs-sdk-maven-plugin</artifactId>
-                <version>6.7.0</version>
                 <executions>
                     <execution>
                         <id>build-distro</id>
-                        <phase>process-resources</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>build-distro</goal>
                         </goals>
                         <configuration>
-                            <distro>${basedir}/openmrs-distro.properties</distro>
+                            <distro>${project.build.directory}/classes/openmrs-distro.properties</distro>
                             <dir>${project.build.directory}/distro</dir>
-                            <bundled>false</bundled>
                         </configuration>
                     </execution>
                 </executions>
@@ -179,7 +178,7 @@
             <!-- Assemble omods, owas, spas, etc into a zip file -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>3.3.0</version>
                 <configuration>
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptors>
