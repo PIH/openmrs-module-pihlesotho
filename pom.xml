@@ -40,6 +40,8 @@
 		<openMRSVersion>2.7.4</openMRSVersion>
 		<appframeworkVersion>2.18.0</appframeworkVersion>
 		<appuiVersion>1.18.0</appuiVersion>
+		<authenticationVersion>2.1.0</authenticationVersion>
+		<authenticationuiVersion>1.2.0</authenticationuiVersion>
 		<calculationVersion>1.3.0</calculationVersion>
 		<coreappsVersion>2.1.0</coreappsVersion>
 		<emrapiVersion>2.3.0</emrapiVersion>
@@ -47,6 +49,7 @@
 		<htmlformentryVersion>6.0.1</htmlformentryVersion>
 		<htmlwidgetsVersion>1.11.0</htmlwidgetsVersion>
 		<idgenVersion>4.14.0</idgenVersion>
+		<initializerVersion>2.10.0</initializerVersion>
 		<legacyuiVersion>1.23.0</legacyuiVersion>
 		<metadatamappingVersion>1.6.0</metadatamappingVersion>
 		<providermanagementVersion>2.15.0</providermanagementVersion>
@@ -83,6 +86,20 @@
 			<groupId>org.openmrs.module</groupId>
 			<artifactId>appui-api</artifactId>
 			<version>${appuiVersion}</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>authentication-api</artifactId>
+			<version>${authenticationVersion}</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>authenticationui-api</artifactId>
+			<version>${authenticationuiVersion}</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
@@ -137,6 +154,13 @@
 			<groupId>org.openmrs.module</groupId>
 			<artifactId>idgen-api</artifactId>
 			<version>${idgenVersion}</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>initializer-api</artifactId>
+			<version>${initializerVersion}</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
