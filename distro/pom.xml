@@ -139,7 +139,6 @@
     <build>
         <plugins>
 
-            <!-- Add the openmrs-distro.properties file into the artifact jar and apply variable replacements -->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <configuration>
@@ -156,8 +155,7 @@
                     <outputDirectory>${project.build.directory}/classes</outputDirectory>
                 </configuration>
             </plugin>
-
-            <!-- Use the SDK to retrieve all artifacts defined in openmrs-distro.properties -->
+            <!-- Use the SDK to retrieve the war, modules, and owas -->
             <plugin>
                 <groupId>org.openmrs.maven.plugins</groupId>
                 <artifactId>openmrs-sdk-maven-plugin</artifactId>
@@ -165,13 +163,14 @@
                 <executions>
                     <execution>
                         <id>build-distro</id>
-                        <phase>prepare-package</phase>
+                        <phase>process-resources</phase>
                         <goals>
                             <goal>build-distro</goal>
                         </goals>
                         <configuration>
-                            <distro>${project.build.directory}/classes/openmrs-distro.properties</distro>
+                            <distro>${basedir}/openmrs-distro.properties</distro>
                             <dir>${project.build.directory}/distro</dir>
+                            <bundled>false</bundled>
                         </configuration>
                     </execution>
                 </executions>
