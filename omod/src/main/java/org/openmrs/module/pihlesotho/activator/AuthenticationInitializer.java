@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.authentication.AuthenticationConfig;
+import org.openmrs.module.web.filter.ForcePasswordChangeFilter;
 
 import java.util.Properties;
 import java.util.Set;
@@ -13,6 +14,7 @@ import static org.openmrs.module.authentication.AuthenticationConfig.SCHEME;
 import static org.openmrs.module.authentication.AuthenticationConfig.SCHEME_CONFIG_PREFIX_TEMPLATE;
 import static org.openmrs.module.authentication.AuthenticationConfig.SCHEME_ID;
 import static org.openmrs.module.authentication.AuthenticationConfig.SCHEME_TYPE_TEMPLATE;
+import static org.openmrs.module.authentication.AuthenticationConfig.SUPPORT_FORCED_PASSWORD_CHANGE;
 
 public class AuthenticationInitializer {
 
@@ -77,6 +79,11 @@ public class AuthenticationInitializer {
         for (String key : sortedKeys) {
             log.info(key + " = " + p.getProperty(key));
         }
+
+        // Force password change
+        AuthenticationConfig.setProperty(SUPPORT_FORCED_PASSWORD_CHANGE, "true");
+        AuthenticationConfig.setProperty(AuthenticationConfig.PASSWORD_CHANGE_URL, "/authenticationui/account/changePassword.page");
+        ForcePasswordChangeFilter.setEnabled(false);  // Disable force password change filter in legacyui
     }
 
     /**
