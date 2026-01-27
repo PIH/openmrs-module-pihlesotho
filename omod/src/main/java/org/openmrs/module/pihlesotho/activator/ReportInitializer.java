@@ -21,6 +21,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.reporting.ReportingConstants;
+import org.openmrs.module.reporting.config.ReportLoader;
 import org.openmrs.module.reporting.dataset.definition.SqlFileDataSetDefinition;
 import org.openmrs.module.reporting.evaluation.parameter.Mapped;
 import org.openmrs.module.reporting.evaluation.parameter.Parameter;
@@ -96,6 +97,7 @@ public class ReportInitializer {
 				}
 			}
 		}
+		ReportLoader.loadReportsFromConfig();
 	}
 	
 	/**

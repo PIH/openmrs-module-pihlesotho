@@ -13,4 +13,8 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-mvn clean install openmrs-sdk:deploy -DserverId=lesotho -Ddistro=distro/target/distro/web/openmrs-distro.properties -DserverId=$1
+SERVER_ID=${1}
+
+mvn clean install openmrs-sdk:deploy -Ddistro=distro/target/distro/web/openmrs-distro.properties -DserverId=${SERVER_ID}
+rm -fR ~/openmrs/${SERVER_ID}/configuration
+cp -a ./configuration/target/openmrs-packager-config/configuration ~/openmrs/${SERVER_ID}/

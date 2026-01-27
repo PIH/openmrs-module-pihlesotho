@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="20260127-create-views" author="mseaton" runAlways="true" runOnChange="true">
+        <sqlFile endDelimiter=";" path="sql/create_views.sql" relativeToChangelogFile="true" stripComments="true" />
+    </changeSet>
+
+    <changeSet id="20260127-create-functions" author="mseaton" runAlways="true" runOnChange="true">
+        <sqlFile endDelimiter="#" path="sql/create_functions.sql" relativeToChangelogFile="true" stripComments="true" />
+    </changeSet>
+
+    <changeSet id="20260127-add-authentication-event-log" author="mseaton">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="authentication_event_log"/></not>
+        </preConditions>
+        <comment>
+            Add table to log authentication events
+        </comment>
+        <createTable tableName="authentication_event_log">
+            <column name="login_id" type="char(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="event_datetime" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ip_address" type="varchar(40)"/>
+            <column name="http_session_id" type="varchar(32)"/>
+            <column name="event_type" type="varchar(50)"/>
+            <column name="username" type="varchar(50)"/>
+            <column name="user_id" type="int"/>
+            <column name="scheme_id" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20260127-authentication-event-log-idx-1" author="mseaton">
+        <preConditions onFail="MARK_RAN">
+            <not><indexExists indexName="authentication_event_log_ui"/></not>
+        </preConditions>
+        <comment>Add index to authentication_event_log on user_id</comment>
+        <createIndex indexName="authentication_event_log_ui" tableName="authentication_event_log">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="20260127-20260127-authentication-event-log-idx-2" author="mseaton">
+        <preConditions onFail="MARK_RAN">
+            <not><indexExists indexName="authentication_event_log_ui_et"/></not>
+        </preConditions>
+        <comment>Add composite index to authentication_event_log on user_id and event_type</comment>
+        <createIndex indexName="authentication_event_log_ui_et" tableName="authentication_event_log">
+            <column name="user_id"/>
+            <column name="event_type"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
