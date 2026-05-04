@@ -37,7 +37,7 @@
 	</modules>
 
 	<properties>
-		<openMRSVersion>2.7.4</openMRSVersion>
+		<openMRSVersion>2.7.9</openMRSVersion>
 		<appframeworkVersion>2.18.0</appframeworkVersion>
 		<appuiVersion>1.18.0</appuiVersion>
 		<authenticationVersion>2.2.0-SNAPSHOT</authenticationVersion>
